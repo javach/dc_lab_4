@@ -65,10 +65,10 @@ uint1024_t subtr_op(uint1024_t x, uint1024_t y) {
     return result;
 }
 
-uint1024_t shift_left(uint1024_t x) {
+uint1024_t shift(uint1024_t x, int pos) {
     uint1024_t result = new_uint1024_t();
-    for (int i = 30; i >= 0; i--) {
-        result.digits[i] = x.digits[i + 1];
+    for (int i = 32 - pos; i >= 0; i--) {
+        result.digits[i] = x.digits[i + pos];
     }
     return result;
 }
@@ -93,8 +93,7 @@ uint1024_t mult_op(uint1024_t x, uint1024_t y) {
 
     for (int i = 31; i >= 0; i--) {
         uint1024_t temp = mult_op_one_digit(x, y.digits[i]);
-        for (int j = 31; j > i; j--)
-            temp = shift_left(temp);
+        temp = shift(temp, 31 - i);
         result = add_op(result, temp);
     }
 
