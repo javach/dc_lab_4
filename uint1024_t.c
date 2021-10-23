@@ -5,8 +5,12 @@
 #include <stdlib.h>
 
 const uint64_t RADIX = 4294967296; // 2^32
-const uint32_t MAX = 4294967295;
 const char ALPHABET[] = "0123456789ABCDEF";
+
+void throw_exception() {
+    printf("Undefined behaviour exception\n", stderr);
+    exit(1);
+}
 
 uint1024_t new_uint1024_t() {
     uint1024_t result;
@@ -33,6 +37,9 @@ uint1024_t add_op(uint1024_t x, uint1024_t y) {
         result.digits[i] = sum % RADIX;
 
         carry = sum >= RADIX ? 1 : 0;
+
+        if (carry == 1 && i == 0)
+            throw_exception();
     }
 
     return result;
@@ -46,6 +53,8 @@ uint1024_t subtr_op(uint1024_t x, uint1024_t y) {
             result.digits[i] = x.digits[i] - y.digits[i];
             continue;
         }
+        if (i == 0)
+            throw_exception();
 
         for (int j = i - 1; j >= 0; j--) {
             if (x.digits[j] > 0) {
@@ -57,6 +66,8 @@ uint1024_t subtr_op(uint1024_t x, uint1024_t y) {
                 result.digits[i] = (uint32_t) digit;
                 break;
             } else {
+                if (j == 0)
+                    throw_exception();
                 x.digits[j] = RADIX - 1;
             }
         }
