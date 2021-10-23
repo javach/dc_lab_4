@@ -144,10 +144,14 @@ void printf_value(uint1024_t x) {
         if (x.digits[i] == 0 && !started)
             continue;
         if (x.digits[i] != 0 && !started) {
-            printf_without_leading_zeroes(convert_to_hex(x.digits[i]));
+            char* t = convert_to_hex(x.digits[i]);
+            printf_without_leading_zeroes(t);
+            free(t);
             started = 1;
         } else {
-            printf("%s", convert_to_hex(x.digits[i]));
+            char *t = convert_to_hex(x.digits[i]);
+            printf("%s", t);
+            free(t);
         }
     }
     if (!started)
@@ -170,4 +174,6 @@ void scanf_value(uint1024_t *x) {
 
         *x = add_op(*x, temp);
     }
+
+    free(str);
 }
