@@ -82,6 +82,7 @@ void command_status_code(FILE *file, const char *status_code, int entries_count)
             printf("\r%s\n", line);
         }
 
+        free(code);
         next_line(file, line, &is_eof);
         line_index++;
     }
@@ -90,12 +91,11 @@ void command_status_code(FILE *file, const char *status_code, int entries_count)
     rewind(file);
 }
 
-void command_bytes_sent(FILE *file, int value, const char *arg, int entries_count) {
-    printf("Executing 'bytes_sent' command...\nEntries with bytes sent value %s %d\n",
-           arg, value);
+void command_bytes_sent(FILE *file, int value, const char op, int entries_count) {
+    printf("Executing 'bytes_sent' command...\nEntries with bytes sent value %c%d:\n",
+           op, value);
 
     char line[500];
-    char copy[500];
     int is_eof = 0;
     int line_index = 0;
     int count = 0;
@@ -104,11 +104,8 @@ void command_bytes_sent(FILE *file, int value, const char *arg, int entries_coun
 
     while (!is_eof) {
         printf_progress(line_index, entries_count);
-        strcpy(copy, line);
-        int bytes_sent = get_bytes_sent(copy);
-        if (strcmp(arg, "more than") == 0 && bytes_sent > value ||
-            strcmp(arg, "equal to") == 0 && bytes_sent == value ||
-            strcmp(arg, "less than") == 0 && bytes_sent < value) {
+        int bytes_sent = get_bytes_sent(line);
+        if (op == '>' && bytes_sent > value || op == '=' && bytes_sent == value || op == '<' == 0 && bytes_sent < value) {
             printf("%s\n", line);
             count++;
         }
@@ -117,6 +114,6 @@ void command_bytes_sent(FILE *file, int value, const char *arg, int entries_coun
         line_index++;
     }
 
-    printf("\rEntries with bytes sent value %s %d total: %d\n\n", arg, value, count);
+    printf("\rEntries with bytes sent value %c%d total: %d\n\n", op, value, count);
     rewind(file);
 }

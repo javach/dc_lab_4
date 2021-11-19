@@ -39,47 +39,61 @@ long convert_date_to_timestamp(char *time_str) {
 
 // TODO: destructive usage of strtok()
 char *get_addr(char *line) {
-    char *addr = strtok(line, " ");
+    char *copy = strdup(line);
+    char *addr = strdup(strtok(copy, " "));
+    free(copy);
     return addr;
 }
 
 // TODO: destructive usage of strtok()
 long get_time(char *line) {
-    strtok(line, "[");
+    char *copy = strdup(line);
+    strtok(copy, "[");
     char *ltime_str = strtok(NULL, "]");
     long result = convert_date_to_timestamp(ltime_str);
+    free(copy);
     return result;
 }
 
 // TODO: destructive usage of strtok()
 char *get_timestr(char *line) {
-    strtok(line, "[");
-    return strtok(NULL, "]");
+    char *copy = strdup(line);
+    strtok(copy, "[");
+    char *result = strdup(strtok(NULL, "]"));
+    free(copy);
+    return result;
 }
 
 // TODO: destructive usage of strtok()
 int get_response_code(char *line) {
-    strtok(line, "\"");
+    char *copy = strdup(line);
+    strtok(copy, "\"");
     strtok(NULL, "\"");
     int result;
     parse_token(NULL, " ", "%d", &result);
+    free(copy);
     return result;
 }
 
 // TODO: destructive usage of strtok()
 char *get_response_code_str(char *line) {
-    strtok(line, "\"");
+    char *copy = strdup(line);
+    strtok(copy, "\"");
     strtok(NULL, "\"");
-    return strtok(NULL, " ");
+    char *result = strdup(strtok(NULL, " "));
+    free(copy);
+    return result;
 }
 
 // TODO: destructive usage of strtok()
 int get_bytes_sent(char *line) {
-    strtok(line, "\"");
+    char *copy = strdup(line);
+    strtok(copy, "\"");
     strtok(NULL, "\"");
     strtok(NULL, " ");
     int result;
     parse_token(NULL, " ", "%d", &result);
+    free(copy);
     return result;
 }
 
