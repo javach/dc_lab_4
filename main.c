@@ -5,23 +5,6 @@
 #include <ctype.h>
 #include "commands.c"
 
-int is_number(char *s) {
-    printf("%s\n", s);
-    printf("%lu\n", strlen(s));
-    for (int i = 0; s[i] != '\0'; i++) {
-        printf("%d\n", i);
-        if (s[i] < '0' || s[i] > '9')
-            return 0;
-    }
-    return 1;
-}
-
-int convert_to_int(const char *s) {
-    int value;
-    sscanf(s, "%d", &value);
-    return value;
-}
-
 void print_usage_string(char *executable_name) {
     fprintf(stderr, "Usage: %s filename\n", executable_name);
 }
@@ -69,16 +52,7 @@ int main(int argc, char *argv[]) {
             int arg_2;
             scanf("%s", &arg_1);
             scanf("%d", &arg_2);
-
-            char op[11];
-            if (arg_1 == '=') strcpy(op, "equals to");
-            else if (arg_1 == '<') strcpy(op, "less than");
-            else if (arg_1 == '>') strcpy(op, "more than");
-            else {
-                printf("Error! Operator must be '=', '<' or '>'\n\n");
-            }
-
-            command_bytes_sent(file, arg_2, op, entries_count);
+            command_bytes_sent(file, arg_2, arg_1, entries_count);
         } else if (strcmp(command, "help") == 0) {
             print_help();
         } else if (strcmp(command, "exit") == 0) {

@@ -38,42 +38,56 @@ long convert_date_to_timestamp(char *time_str) {
 }
 
 char *get_addr(char *line) {
-    char *addr = strtok(line, " ");
+    char *copy = strdup(line);
+    char *addr = strdup(strtok(copy, " "));
+    free(copy);
     return addr;
 }
 
 long get_time(char *line) {
-    strtok(line, "[");
+    char *copy = strdup(line);
+    strtok(copy, "[");
     char *ltime_str = strtok(NULL, "]");
     long result = convert_date_to_timestamp(ltime_str);
+    free(copy);
     return result;
 }
 
 char *get_timestr(char *line) {
-    strtok(line, "[");
-    return strtok(NULL, "]");
+    char *copy = strdup(line);
+    strtok(copy, "[");
+    char *result = strdup(strtok(NULL, "]"));
+    free(copy);
+    return result;
 }
 
 int get_response_code(char *line) {
-    strtok(line, "\"");
+    char *copy = strdup(line);
+    strtok(copy, "\"");
     strtok(NULL, "\"");
     int result;
     parse_token(NULL, " ", "%d", &result);
+    free(copy);
     return result;
 }
 
 char *get_response_code_str(char *line) {
-    strtok(line, "\"");
+    char *copy = strdup(line);
+    strtok(copy, "\"");
     strtok(NULL, "\"");
-    return strtok(NULL, " ");
+    char *result = strdup(strtok(NULL, " "));
+    free(copy);
+    return result;
 }
 
 int get_bytes_sent(char *line) {
-    strtok(line, "\"");
+    char *copy = strdup(line);
+    strtok(copy, "\"");
     strtok(NULL, "\"");
     strtok(NULL, " ");
     int result;
     parse_token(NULL, " ", "%d", &result);
+    free(copy);
     return result;
 }
 
