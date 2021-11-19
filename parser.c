@@ -37,11 +37,13 @@ long convert_date_to_timestamp(char *time_str) {
     return (long) mktime(&tm);
 }
 
+// TODO: destructive usage of strtok()
 char *get_addr(char *line) {
     char *addr = strtok(line, " ");
     return addr;
 }
 
+// TODO: destructive usage of strtok()
 long get_time(char *line) {
     strtok(line, "[");
     char *ltime_str = strtok(NULL, "]");
@@ -49,11 +51,13 @@ long get_time(char *line) {
     return result;
 }
 
+// TODO: destructive usage of strtok()
 char *get_timestr(char *line) {
     strtok(line, "[");
     return strtok(NULL, "]");
 }
 
+// TODO: destructive usage of strtok()
 int get_response_code(char *line) {
     strtok(line, "\"");
     strtok(NULL, "\"");
@@ -62,12 +66,14 @@ int get_response_code(char *line) {
     return result;
 }
 
+// TODO: destructive usage of strtok()
 char *get_response_code_str(char *line) {
     strtok(line, "\"");
     strtok(NULL, "\"");
     return strtok(NULL, " ");
 }
 
+// TODO: destructive usage of strtok()
 int get_bytes_sent(char *line) {
     strtok(line, "\"");
     strtok(NULL, "\"");
