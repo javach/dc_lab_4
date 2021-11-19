@@ -37,7 +37,6 @@ long convert_date_to_timestamp(char *time_str) {
     return (long) mktime(&tm);
 }
 
-// TODO: destructive usage of strtok()
 char *get_addr(char *line) {
     char *copy = strdup(line);
     char *addr = strdup(strtok(copy, " "));
@@ -45,7 +44,6 @@ char *get_addr(char *line) {
     return addr;
 }
 
-// TODO: destructive usage of strtok()
 long get_time(char *line) {
     char *copy = strdup(line);
     strtok(copy, "[");
@@ -55,7 +53,6 @@ long get_time(char *line) {
     return result;
 }
 
-// TODO: destructive usage of strtok()
 char *get_timestr(char *line) {
     char *copy = strdup(line);
     strtok(copy, "[");
@@ -64,7 +61,6 @@ char *get_timestr(char *line) {
     return result;
 }
 
-// TODO: destructive usage of strtok()
 int get_response_code(char *line) {
     char *copy = strdup(line);
     strtok(copy, "\"");
@@ -75,7 +71,6 @@ int get_response_code(char *line) {
     return result;
 }
 
-// TODO: destructive usage of strtok()
 char *get_response_code_str(char *line) {
     char *copy = strdup(line);
     strtok(copy, "\"");
@@ -85,7 +80,6 @@ char *get_response_code_str(char *line) {
     return result;
 }
 
-// TODO: destructive usage of strtok()
 int get_bytes_sent(char *line) {
     char *copy = strdup(line);
     strtok(copy, "\"");
