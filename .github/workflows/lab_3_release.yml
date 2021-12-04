@@ -4,16 +4,14 @@ on:
     branches: 
       - lab_3-master
     tags:
-      - 'v*'
+      - 'lab_3-v*'
 
-jobs:
+job:
   build-and-release:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Build
-        run: "gcc main.c -o program"
       - name: Create release
         uses: actions/create-release@v1
         env:
