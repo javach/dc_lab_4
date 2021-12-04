@@ -2,19 +2,10 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
+#include "process_file.c"
 
 void print_usage_string(char* executable_name) {
     printf("Usage: %s filename [-l | --lines] [-b | --bytes] [-w | --words]\n", executable_name);
-}
-
-bool is_word_delimiter(char c) {
-    if (c == '\n')
-        return true;
-    if (c == ' ')
-        return true;
-    if (c == '\t')
-        return true;
-    return false;
 }
 
 int main(int argc, char *argv[]) {
@@ -54,24 +45,8 @@ int main(int argc, char *argv[]) {
     int bytes_count = 0;
     int words_count = 0;
 
-    bool inside_word = false;
-    char current_char;
-
-    while ((current_char = fgetc(input_file)) != EOF) {
-        if (current_char == '\n')
-            lines_count++;
-        if (is_word_delimiter(current_char)) {
-            inside_word = false;
-        } else if (!inside_word) {
-            words_count++;
-            inside_word = true;
-        }
-        bytes_count += sizeof(current_char);
-    }
-
-    if (bytes_count == 0)
-        lines_count = 0;
-
+    process_file(input_file, &lines_count, &bytes_count, &words_count);
+    
     bool all_flag = !words_flag && !lines_flag && !bytes_flag;
 
     if (all_flag || lines_flag)
