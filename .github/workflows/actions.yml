@@ -1,0 +1,17 @@
+name: Lab 1 Workflow
+on: [push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: "echo "running tests..."; cmake -S . -B build && cmake --build build && cd build && ctests"
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Compile' 
+        run: 'gcc main.c -o program'
+      - name: 'Upload artifact'
+        uses: 'actions/upload-artifact@v2'
+        with:
+          name: 'program'
+          path: 'program'
