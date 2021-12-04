@@ -6,7 +6,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-       - name: Test
+      - name: Test
         run: "cmake -S . -B build && cmake --build build && cd build && ctest"
   build-and-deploy:
     runs-on: ubuntu-latest
