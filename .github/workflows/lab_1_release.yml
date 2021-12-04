@@ -6,7 +6,7 @@ on:
     tags:
       - 'lab_1-v*'
 
-job:
+jobs:
   build-and-release:
     runs-on: ubuntu-latest
     steps:
