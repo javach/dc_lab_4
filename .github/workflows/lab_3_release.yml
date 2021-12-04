@@ -2,7 +2,7 @@ name: Lab 3 Release Workflow
 on: 
   push: 
     branches: 
-      - lab_1-master
+      - lab_3-master
     tags:
       - 'v*'
 
