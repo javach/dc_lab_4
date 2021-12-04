@@ -5,10 +5,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Test
-        run: "cmake -S . -B build && cmake --build build && cd build && ctests"
+        run: "ls && cmake -S . -B build && cmake --build build && cd build && ctests"
       - name: Build 
         run: "gcc main.c -o program"
-      - name: Deploye artifact
+      - name: Deploy artifact
         uses: "actions/upload-artifact@v2"
         with:
           name: program
