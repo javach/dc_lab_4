@@ -8,9 +8,9 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: 'Compile' 
+      - name: 'Build' 
         run: 'gcc main.c -o program'
-      - name: 'Upload artifact'
+      - name: 'Deploye artifact'
         uses: 'actions/upload-artifact@v2'
         with:
           name: 'program'
