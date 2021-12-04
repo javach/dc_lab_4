@@ -1,0 +1,17 @@
+name: Lab 1 Workflow
+on: [push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Test
+        run: "ls && cmake -S . -B build && cmake --build build && cd build && ctest"
+      - name: Build 
+        run: "gcc main.c -o program"
+      - name: Deploy artifact
+        uses: "actions/upload-artifact@v2"
+        with:
+          name: program
+          path: program
