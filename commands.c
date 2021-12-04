@@ -105,7 +105,7 @@ void command_bytes_sent(FILE *file, int value, const char op, int entries_count)
     while (!is_eof) {
         printf_progress(line_index, entries_count);
         int bytes_sent = get_bytes_sent(line);
-        if (op == '>' && bytes_sent > value || op == '=' && bytes_sent == value || op == '<' == 0 && bytes_sent < value) {
+        if (op == '>' && bytes_sent > value || op == '=' && bytes_sent == value || op == '<' && bytes_sent < value) {
             printf("%s\n", line);
             count++;
         }
