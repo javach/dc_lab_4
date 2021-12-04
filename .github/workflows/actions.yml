@@ -4,10 +4,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - run: "echo "running tests..."; cmake -S . -B build && cmake --build build && cd build && ctests"
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    steps:
+      - name: 'Test'
+        run: "echo "running tests..."; cmake -S . -B build && cmake --build build && cd build && ctests"
       - name: 'Build' 
         run: 'gcc main.c -o program'
       - name: 'Deploye artifact'
