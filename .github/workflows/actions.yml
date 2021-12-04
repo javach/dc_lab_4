@@ -4,12 +4,12 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: 'Test'
+      - name: Test
         run: "echo "running tests..."; cmake -S . -B build && cmake --build build && cd build && ctests"
-      - name: 'Build' 
-        run: 'gcc main.c -o program'
-      - name: 'Deploye artifact'
-        uses: 'actions/upload-artifact@v2'
+      - name: Build 
+        run: "gcc main.c -o program"
+      - name: Deploye artifact
+        uses: "actions/upload-artifact@v2"
         with:
-          name: 'program'
-          path: 'program'
+          name: program
+          path: program
