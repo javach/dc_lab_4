@@ -4,16 +4,14 @@ on:
     branches: 
       - lab_2-master
     tags:
-      - 'v*'
+      - 'lab_2-v*'
 
-jobs:
+job:
   build-and-release:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Build
-        run: "gcc main.c -o program"
       - name: Create release
         uses: actions/create-release@v1
         env:
@@ -21,6 +19,6 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
-          body: "New release"
+          body: "New release!"
           draft: false
           prerelease: false
